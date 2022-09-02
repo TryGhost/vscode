@@ -1,0 +1,72 @@
+{
+    "get": {
+        "prefix": [
+            "get",
+            "{{#g"
+        ],
+        "body": [
+            "{{#get \"${1|posts,tags,authors,tiers|}\"${2: include=\"authors,tags\"}${3: limit=\"10\"}${4: as |posts pagination|}}}",
+            "    {{#foreach $1}}",
+            "        $5",
+            "    {{/foreach}}\n{{/get}}"
+        ],
+        "description": "Special block helper for custom queries"
+    },
+    "has": {
+        "prefix": [
+            "has",
+            "{{#h"
+        ],
+        "body": [
+            "{{has ${1|tag,slug,name|}=\"$2\"}}",
+            "    $3",
+            "{{/has}}"
+        ]
+    },
+    "is": {
+        "prefix": [
+            "is",
+            "{{#is"
+        ],
+        "body": [
+            "{{#is \"${1|home,index,post,page,tag,author,paged,private|}\"}}",
+            "    $2",
+            "{{/is}}"
+        ],
+        "description": "Check the context of the current route."
+    },
+    "foreach": {
+        "prefix": [
+            "foreach",
+            "fe",
+            "{{#for"
+        ],
+        "body": [
+            "{{#foreach ${1:posts}}}",
+            "    $2",
+            "{{/foreach}}"
+        ]
+    },
+    "if": {
+        "prefix": [
+            "if",
+            "{{#if"
+        ],
+        "body": [
+            "{{#if ${1:featured}}}",
+            "    $2",
+            "{{/if}}"
+        ]
+    },
+    "match": {
+        "prefix": [
+            "match"
+        ],
+        "body": [
+            "{{#match ${1:@custom.} \"${2:|=,!=,>,<,>=,<=,|\" $3}}}",
+            "  $4",
+            "{{/match}}"
+        ],
+        "description": "Compare two values for equality"
+    }
+}
