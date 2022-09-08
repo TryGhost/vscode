@@ -1,7 +1,9 @@
 export enum HelperTypes {
   functional = "functional",
   data = "data",
-  utility = "utility"
+  utility = "utility",
+  attribute = "attribute",
+  variable = "variable"
 }
 
 export interface HelperSchema  {
@@ -12,5 +14,8 @@ export interface HelperSchema  {
       example: string;
       link: string;
       snippet: string | null;
+      parents: string[] | null;
+      variables: string[] | null;
+      attributes: string[] | null;
     };
   

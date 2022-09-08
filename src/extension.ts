@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
   let disposable = vscode.commands.registerCommand(
-    "ghost-helper.search",
+    "ghost-theme-development-helper.search",
     async () => {
       const doc = await vscode.window.showQuickPick(definitionsForQuickPick, {
         matchOnDetail: true,
@@ -27,20 +27,30 @@ export function activate(context: vscode.ExtensionContext) {
       if (!doc) {
         return;
       }
-      const file = context.asAbsolutePath(`/src/docs/${doc.label}.md`);
-      await vscode.commands.executeCommand(
-        "markdown.showPreview",
-        vscode.Uri.file(file)
-      );
+
+      vscode.env.openExternal(vscode.Uri.parse(doc.link));
     }
   );
 
   vscode.languages.registerHoverProvider("handlebars", {
     provideHover(document, position, token) {
+      const position2 = new vscode.Position(position.line, position.character);
+      const line = document.lineAt(position2).text;
+
+      const isPartial = /{{>/.test(line);
+     
+      if (isPartial) {
+        const partialDoc = definitions.find(doc => doc.name === "partials")!;
+        const formattedPartialDoc = codeDetailFormatter(partialDoc);
+        console.log(partialDoc)
+        return new vscode.Hover(formattedPartialDoc);
+      }
+
       const range = document.getWordRangeAtPosition(position);
       const word = document.getText(range);
+
       const helper = definitions.find((val) => {
-        const regEx = new RegExp(val.name);
+        const regEx = new RegExp("^#?@?" + val.name.replace(/\W/,"") + "$");
         return regEx.test(word);
       });
 
@@ -65,17 +75,16 @@ export function activate(context: vscode.ExtensionContext) {
       ) {
         let commands: vscode.CompletionItem[] = [];
         const snippets = await definitionsWithSnippets();
+
         if (!snippets) {
           return;
         }
 
         snippets.forEach((item) => {
-          console.log(item);
           const commandCompletion = new vscode.CompletionItem(item.name);
           commandCompletion.kind = vscode.CompletionItemKind.Snippet;
           commandCompletion.detail = "Ghost template helper";
           commandCompletion.documentation = item.definition;
-
           commandCompletion.insertText = new vscode.SnippetString(
             item.snippet!
           );

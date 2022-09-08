@@ -3,7 +3,7 @@ import { HelperSchema, HelperTypes } from "./helperInterface";
 export const functionalDefinitions: HelperSchema[] = [
   {
     name: "foreach",
-    snippet: "{{#foreach $1}}\n\t$2\n{{/foreach}}",
+    snippet: "{{#foreach $1}}\n\t$0\n{{/foreach}}",
     type: HelperTypes["functional"],
     usage: "{{#foreach data}}{{/foreach}}",
     definition: "Loop helper designed for working with lists of posts",
@@ -18,11 +18,12 @@ export const functionalDefinitions: HelperSchema[] = [
       </article>
     {{/foreach}}`,
     link: "https://ghost.org/docs/themes/helpers/foreach/",
+    parents: null,
   },
 
   {
     name: "get",
-    snippet: "{{#get ${1|\"posts\",\"tags\",\"authors\",\"tiers\"|}$2}}\n\t$3\n{{/get}}",
+    snippet: '{{#get ${1|"posts","tags","authors","tiers"|}}}\n\t$0\n{{/get}}',
     type: HelperTypes["functional"],
     usage: '{{#get "posts"}}{{/get}}',
     definition: "Special block helper for custom queries.",
@@ -35,6 +36,7 @@ export const functionalDefinitions: HelperSchema[] = [
         {{/get}}
     {{/post}}`,
     link: "https://ghost.org/docs/themes/helpers/get/",
+    parents: null,
   },
   {
     name: "has",
@@ -47,6 +49,7 @@ export const functionalDefinitions: HelperSchema[] = [
     {{! ..Will execute if the slug is welcome OR the tag is getting-started...}}
     {{/has}}`,
     link: "https://ghost.org/docs/themes/helpers/has/",
+    parents: null,
   },
 
   {
@@ -62,6 +65,7 @@ export const functionalDefinitions: HelperSchema[] = [
       {{/if}}
     {{/post}}`,
     link: "https://ghost.org/docs/themes/helpers/if/",
+    parents: null,
   },
   {
     name: "is",
@@ -75,6 +79,7 @@ export const functionalDefinitions: HelperSchema[] = [
     {{!  ... content to render if the current route represents a post or a page ...}}
     {{/is}}`,
     link: "https://ghost.org/docs/themes/helpers/is/",
+    parents: null,
   },
 
   {
@@ -87,6 +92,7 @@ export const functionalDefinitions: HelperSchema[] = [
 
     example: `{{#match @custom.color_scheme "=" "Dark"}}...{{else}}...{{/match}}`,
     link: "https://ghost.org/docs/themes/helpers/match/",
+    parents: null,
   },
 
   {
@@ -100,5 +106,6 @@ export const functionalDefinitions: HelperSchema[] = [
       {{!...do something...}}
     {{/unless}}`,
     link: "https://ghost.org/docs/themes/helpers/unless/",
+    parents: null,
   },
 ];

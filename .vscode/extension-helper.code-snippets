@@ -22,13 +22,14 @@
 				"{",
 				"\tname: '$1',",
 				"\ttype: HelperTypes['$2'],",
-				"\tsnippet: '$3',",
-				"\tusage: '$4',",
-				"\tdefinition: '$5',",
-				"\texample: `$6`,",
-				"\tlink: '$CLIPBOARD'", 
+				"\tsnippet: ${3|null,''|}$4,",
+				"\tusage: '$5',",
+				"\tdefinition: '$6',",
+				"\texample: `$7`,",
+				"\tlink: '$CLIPBOARD',",
+				"\tparents: ${8|null,''|}$9",
 				"},",
-				"$7"
+				"$0"
 			],
 			"description": "Create definition for Ghost helper"
 		}

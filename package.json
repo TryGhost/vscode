@@ -1,7 +1,7 @@
 {
-	"name": "ghost-helper",
-	"displayName": "Ghost Helper",
-	"description": "Assist Ghost theme development",
+	"name": "ghost-theme-development-helper",
+	"displayName": "Ghost Theme Development Helper",
+	"description": "Helps you develop Ghost themes quickly",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.67.0"
@@ -17,8 +17,8 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "ghost-helper.search",
-				"title": "Search Ghost theme docs"
+				"command": "ghost-theme-development-helper.search",
+				"title": "Search the Ghost theme docs"
 			}
 		]
 	},

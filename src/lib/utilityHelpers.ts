@@ -10,6 +10,9 @@ export const utilityDefinitions: HelperSchema[] = [
       "Outputs cacheable and cache-busting relative URLs to various asset",
     example: `{{asset 'css/style.css'}}`,
     link: "https://ghost.org/docs/themes/helpers/asset",
+    parents: null,
+    attributes: ['hasMinFile'],
+    variables: null,
   },
 
   {
@@ -19,18 +22,43 @@ export const utilityDefinitions: HelperSchema[] = [
     usage: '{{{block "section"}}} and {{#contentFor "section"}}',
     definition:
       '{{{block "block-name"}}} is a helper for creating a placeholder within a custom handlebars template.',
-    example: `
-    <!-- default.hbs -->
-    <body>
-        {{{block "scripts"}}}
-    </body>
-    <!-- page.hbs -->
-    {{#contentFor "scripts"}}
-        <script>
-            runPageScripts();
-        </script>
-    {{/contentFor}}`,
+    example: `<!-- default.hbs -->
+<body>
+    {{{block "scripts"}}}
+</body>
+<!-- page.hbs -->
+{{#contentFor "scripts"}}
+    <script>
+        runPageScripts();
+    </script>
+{{/contentFor}}`,
     link: "https://ghost.org/docs/themes/helpers/block/",
+    parents: null,
+    attributes: null,
+    variables: null,
+  },
+
+  {
+    name: "contentFor",
+    type: HelperTypes["utility"],
+    snippet: null,
+    usage: '{{{block "section"}}} and {{#contentFor "section"}}',
+    definition:
+      '{{#contentFor block name}} is a helper for adding to a block placeholder.',
+    example: `<!-- default.hbs -->
+<body>
+    {{{block "scripts"}}}
+</body>
+<!-- page.hbs -->
+{{#contentFor "scripts"}}
+    <script>
+        runPageScripts();
+    </script>
+{{/contentFor}}`,
+    link: "https://ghost.org/docs/themes/helpers/block/",
+    parents: null,
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -39,9 +67,12 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{body_class}}",
     definition:
-      "{{body_class}} – outputs dynamic CSS classes intended for the <body> tag in your default.hbs or other layout file, and is useful for targeting specific pages (or contexts) with styles.",
+      "{{body_class}} – outputs dynamic CSS classes intended for the <body> tag in your default.hbs or other layout file, and is useful for targeting specific pages (or contexts) with styles. Values include home-template, post-template, page-template, tag-template, author-template, and private-template",
     example: `<body class="{{body_class}}">`,
     link: "https://ghost.org/docs/themes/helpers/body_class/",
+    parents: null,
+    attributes: null,
+    variables: null
   },
 
   {
@@ -53,6 +84,9 @@ export const utilityDefinitions: HelperSchema[] = [
       "The {{concat}} helper is designed to concatenate and link multiple things together.",
     example: `{{concat "my-class" slug }}`,
     link: "https://ghost.org/docs/themes/helpers/concat/",
+    parents: null,
+    attributes: ['separator'],
+    variables: null
   },
 
   {
@@ -62,28 +96,46 @@ export const utilityDefinitions: HelperSchema[] = [
     usage: "{{encode value}}",
     definition:
       "{{encode}} is a simple output helper which will encode a given string so that it can be used in a URL.",
-    example: `
-    <a class="icon-twitter" href="https://twitter.com/share?text={{encode title}}&url={{url absolute='true'}}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-        <span class="hidden">Twitter</span>
-    </a>`,
+  example: `<a class="icon-twitter" href="https://twitter.com/share?text={{encode title}}&url={{url absolute='true'}}" onclick="window.open(this.href,    'twitter-share', 'width=550,height=235');return false;">
+<span class="hidden">Twitter</span>
+</a>`,
     link: "https://ghost.org/docs/themes/helpers/encode/",
+    parents: null,
+    attributes: null,
+    variables: null
   },
 
   {
-    name: "ghost_head_foot",
+    name: "ghost_head",
     type: HelperTypes["utility"],
     snippet: null,
     usage: "{{ghost_head}} and {{ghost_foot}}",
     definition:
-      "These helpers output vital system information at the top and bottom of the document, and provide hooks to inject additional scripts and styles.",
-    example: `
-    <head>
-    {{ghost_head}}
-    </head>
-    <!-- ... -->
-    {{ghost_foot}}
-    </body>`,
+      "Outputs vital system information in the document <head> like metadata, scripts, and styles.",
+    example: `<head>
+  <!-- Other styles and scripts -->
+  {{ghost_head}}
+</head>`,
     link: "https://ghost.org/docs/themes/helpers/ghost_head_foot/",
+    parents: null,
+    attributes: null,
+    variables: null,
+  },
+  {
+    name: "ghost_foot",
+    type: HelperTypes["utility"],
+    snippet: null,
+    usage: "{{ghost_foot}}",
+    definition:
+      "Outputs anything added to Code Injection at the global or page level.",
+    example: `<body>
+  <!-- ... -->
+  {{ghost_foot}}
+</body>`,
+    link: "https://ghost.org/docs/themes/helpers/ghost_head_foot/",
+    parents: null,
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -95,6 +147,9 @@ export const utilityDefinitions: HelperSchema[] = [
       "The {{link_class}} helper adds dynamic classes depending on the currently viewed page.",
     example: `<li class="nav {{link_class for="/about/" activeClass="active"}}">About</li>`,
     link: "https://ghost.org/docs/themes/helpers/link_class/",
+    parents: null,
+    attributes: ["for", "activeClass", "class"],
+    variables: null
   },
 
   {
@@ -103,12 +158,12 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{log value}}",
     definition:
-      "When running Ghost in development mode, you can use the {{log}} helper to output debug messages to the server console. ",
-    example: `
-    {{#foreach posts}}
-        {{log post}}
-    {{/foreach}}`,
+      "When running Ghost in development mode, use the {{log}} helper to output debug messages to the server console.",
+    example: `{{log this}}`,
     link: "https://ghost.org/docs/themes/helpers/log/",
+    parents: null,
+    variables: null,
+    attributes: null
   },
 
   {
@@ -130,6 +185,9 @@ export const utilityDefinitions: HelperSchema[] = [
         {{/if}}
     </nav>`,
     link: "https://ghost.org/docs/themes/helpers/pagination/",
+    parents: null,
+    attributes: ["page", "prev", "next", "pages", "total", "limit", "page_url"],
+    variables: null
   },
 
   {
@@ -139,11 +197,13 @@ export const utilityDefinitions: HelperSchema[] = [
     usage: '{{> "partial-name"}}',
     definition:
       '{{> "partials"}} is a helper for reusing chunks of template code in handlebars files.',
-    example: `
-    {{#foreach posts}}
-        {{> "post-card"}}
-    {{/foreach}}`,
+    example: `{{#foreach posts}}
+  {{> "post-card"}}
+{{/foreach}}`,
     link: "https://ghost.org/docs/themes/helpers/partials/",
+    parents: null,
+    attributes: ["property"],
+    variables: null
   },
 
   {
@@ -155,6 +215,9 @@ export const utilityDefinitions: HelperSchema[] = [
       "{{plural}} is a formatting helper for outputting strings which change depending on whether a number is singular or plural.",
     example: `{{plural pagination.total empty='No posts' singular='% post' plural='% posts'}}`,
     link: "https://ghost.org/docs/themes/helpers/plural/",
+    parents: null,
+    attributes: ["empty", "singular", "plural"],
+    variables: null
   },
 
   {
@@ -163,30 +226,58 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{post_class}}",
     definition:
-      "{{post_class}} outputs classes intended for your post container, useful for targeting posts with styles.",
+      "`{{post_class}}` outputs classes intended for your post container, useful for targeting posts with styles. The classes are as follows: `post`, `featured`, `page`, `tag-:slug`. A featured page with a tag of `photo` and `panoramic` would get `post tag-photo tag-panoramic featured page`.",
     example: `<article class="{{post_class}}">`,
     link: "https://ghost.org/docs/themes/helpers/post_class/",
+    parents: null,
+    attributes: null,
+    variables: null
   },
 
   {
-    name: "prev_next_pos",
+    name: "prev_post",
     type: HelperTypes["utility"],
     snippet: null,
     usage:
-      "{{#prev_post}}{{title}}{{/prev_post}} - {{#next_post}}{{title}}{{/next_post}}",
+      "{{#prev_post}}{{title}}{{/prev_post}}",
     definition:
-      "When in the scope of a post, you can call the next or previous post helper, which performs a query against the API to fetch the next or previous post in accordance with the chronological order of the site.",
-    example: `
-    {{#post}}
-        {{#prev_post}}
-            <a href="{{url}}">{{title}}</a>
-        {{/prev_post}}
+      "When in the scope of a post, you can call the previous post helper, which performs a query against the API to fetch the previous post in accordance with the chronological order of the site.",
+    example: `{{#post}}
+  {{#prev_post}}
+      <a href="{{url}}">{{title}}</a>
+  {{/prev_post}}
 
-        {{#next_post}}
-            <a href="{{url}}">{{title}}</a>
-        {{/next_post}}
-    {{/post}}`,
+  {{#next_post}}
+      <a href="{{url}}">{{title}}</a>
+  {{/next_post}}
+{{/post}}`,
     link: "https://ghost.org/docs/themes/helpers/prev_next_post/",
+    parents: null,
+    attributes: ['in'],
+    variables: null
+  },
+
+  {
+    name: "next_post",
+    type: HelperTypes["utility"],
+    snippet: null,
+    usage:
+      "{{#next_post}}{{title}}{{/next_post}}",
+    definition:
+      "When in the scope of a post, you can call the next post helper, which performs a query against the API to fetch the next post in accordance with the chronological order of the site.",
+    example: `{{#post}}
+  {{#prev_post}}
+      <a href="{{url}}">{{title}}</a>
+  {{/prev_post}}
+
+  {{#next_post}}
+      <a href="{{url}}">{{title}}</a>
+  {{/next_post}}
+{{/post}}`,
+    link: "https://ghost.org/docs/themes/helpers/prev_next_post/",
+    parents: null,
+    attributes: ['in'],
+    variables: null
   },
 
   {
@@ -195,9 +286,12 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{reading_time}}",
     definition:
-      "{{reading_time}} renders the estimated reading time for a post.",
+      "`{{reading_time}}` renders the estimated reading time for a post.",
     example: `{{reading_time minute="Only a minute" minutes="Takes % minutes"}}`,
     link: "https://ghost.org/docs/themes/helpers/reading_time/",
+    parents: null,
+    attributes: ['minute', 'minutes'],
+    variables: null
   },
 
   {
@@ -209,6 +303,9 @@ export const utilityDefinitions: HelperSchema[] = [
       "The {{search}} helper outputs a search icon button that launches Ghost search when clicked.",
     example: `{{search}}`,
     link: "https://ghost.org/docs/themes/helpers/search/",
+    parents: null,
+    attributes: null,
+    variables: null
   },
 
   {
@@ -216,8 +313,11 @@ export const utilityDefinitions: HelperSchema[] = [
     type: HelperTypes["utility"],
     snippet: null,
     usage: "{{t}}",
-    definition: "{{t}} is a helper to output text in your site language.",
+    definition: "`{{t}}` is a helper to output text in your site language.",
     example: `{{t "Back"}}`,
     link: "https://ghost.org/docs/themes/helpers/translate/",
+    parents: null,
+    attributes: ['placeholder', 'subexpressions'],
+    variables: null
   },
 ];
