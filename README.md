@@ -48,3 +48,18 @@ Initial release of **Ghost Theme Development Helper**
 ## Tips & Tricks
 - Matches for hover are simple, so the extension may generate some false positives.
 - For autocomplete, write Handlebar helpers without curly braces (`{{``}}`). For example, write `foreach` not `{{foreach}}`.
+
+
+## Deveopment
+
+* Clone the repo
+* Install dependencies
+```bash
+yarn
+# or
+npm install
+```
+* Start the debugger (`F5`)
+* See `development.md` for more information.
+
+
