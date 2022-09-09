@@ -109,8 +109,8 @@ export const functionalDefinitions: HelperSchema[] = [
     usage: '{{#is "contexts"}}',
     definition: "The `{{#is}}` helper allows you to check the context of the current route. For example, to check if this is the home page, a post, or a tag page. Use this to output different content based on the current context.",
     example: `{{#is "post, page"}}
-      {{!  ... content to render if the current route represents a post or a page ...}}
-    {{/is}}`,
+  {{!  ... content to render if the current route represents a post or a page ...}}
+{{/is}}`,
     link: "https://ghost.org/docs/themes/helpers/is/",
     parents: null,
     attributes: ["home","index","post","page","tag","author","paged","private"],

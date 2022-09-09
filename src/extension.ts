@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
+  let search = vscode.commands.registerCommand(
     "ghost-theme-development-helper.search",
     async () => {
       const doc = await vscode.window.showQuickPick(definitionsForQuickPick, {
@@ -32,24 +32,34 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  vscode.languages.registerHoverProvider("handlebars", {
+  let gscan = vscode.commands.registerCommand(
+    "ghost-theme-development-helper.gscan",
+() =>
+    {
+      const terminal = vscode.window.createTerminal('👻 Ghost GScan');
+      terminal.show();
+      terminal.sendText('npx gscan .');
+    }
+  );
+
+  let hoverProvider = vscode.languages.registerHoverProvider("handlebars", {
     provideHover(document, position, token) {
       const position2 = new vscode.Position(position.line, position.character);
       const line = document.lineAt(position2).text;
 
       const isPartial = /{{>/.test(line);
-     
+
       if (isPartial) {
-        const partialDoc = definitions.find(doc => doc.name === "partials")!;
+        const partialDoc = definitions.find((doc) => doc.name === "partials")!;
         const formattedPartialDoc = codeDetailFormatter(partialDoc);
         return new vscode.Hover(formattedPartialDoc);
       }
 
       const range = document.getWordRangeAtPosition(position);
       const word = document.getText(range);
-    
+
       const helper = definitions.find((val) => {
-        const regEx = new RegExp("^#?@?" + val.name.replace(/\W/,"") + "$");
+        const regEx = new RegExp("^#?@?" + val.name.replace(/\W/, "") + "$");
         return regEx.test(word);
       });
 
@@ -96,7 +106,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  context.subscriptions.push(disposable, provider);
+  context.subscriptions.push(search, provider, hoverProvider, gscan);
 }
 
 // this method is called when your extension is deactivated

@@ -11,7 +11,7 @@ interface Custom {
   [name: string]: {};
 }
 
-const alt = `alt="\${5|{{title\}\},{{@site.title\}\},{{name\}\},{{#if feature_image_alt\}\}{{feature_image_alt\}\}{{else\}\}{{title\}\}{{/if\}\}|}"`
+const alt = `alt="\${5|{{title\}\},{{@site.title\}\},{{name\}\},{{#if feature_image_alt\}\}{{feature_image_alt\}\}{{else\}\}{{title\}\}{{/if\}\}|}"`;
 
 const responsiveImageTemplate = (
   sizes: string,

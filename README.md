@@ -1,6 +1,6 @@
-# ghost-helper README
+# Ghost Theme Development Helper README
 
-Ghostwriter helps you develop themes for the opensource publishing platform [Ghost](https://ghost.org/)
+ The Ghost Theme Development Helper VS Code Extension helps you develop themes for the open-source publishing platform [Ghost](https://ghost.org/).
 
 ## Features
 
@@ -14,36 +14,37 @@ Currently, the following commands are supported:
 
 ### Dynamic autocomplete
 
-Ghostwriter also provides three dynamic autocomplete functions that reads data from your theme configuration (`package.json`).
+This extension also provides three dynamic autocomplete functions that reads data from your theme configuration (`package.json`).
 
 - `custom`: generates a list of your custom properties for easy autocompetion
 - `img:responsive`: generates a responsive image srcset based on your theme's configured image sizes
 - `img:formats`: generates a responsive image srcset but also includes sytnax for converting image formats
 
 ### Help
-Use the `ghost help` command to search theme docs and open the relevant doc on the web.
+Use the `Ghost search` command to search theme documentation and open the official page.
 
-\!\[feature X\]\(images/feature-x.png\)
+### Gscan
+Use the `Gscan` command to scan your Ghost theme for errors.
+
+If `Gscan` is not installed, you'll be prompted to install it before it runs.
+
+<!-- \!\[feature X\]\(images/feature-x.png\) -->
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
-For best results, open VS Code so that your theme is the root folder.
+Open your theme as the root folder in VS Code.
 
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+- Initial release 🎉
 
 ### 1.0.0
 
-Initial release of Ghostwriter
+Initial release of **Ghost Theme Development Helper**
 
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
+## Tips & Tricks
+- Matches for hover are simple, so the extension may generate some false positives.
+- For autocomplete, write Handlebar helpers without curly braces (`{{``}}`). For example, write `foreach` not `{{foreach}}`.

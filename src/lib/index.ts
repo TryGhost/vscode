@@ -22,7 +22,7 @@ export const definitionsForQuickPick: {
   const { name, definition, link } = def;
   return {
     label: name,
-    detail: definition,
+    detail: definition.replace(/`/g,''),
     link,
   };
 });

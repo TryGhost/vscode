@@ -127,7 +127,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{ghost_foot}}",
     definition:
-      "Outputs anything added to Code Injection at the global or page level.",
+      "Outputs anything added to `Code Injection` at the global or page level.",
     example: `<body>
   <!-- ... -->
   {{ghost_foot}}
