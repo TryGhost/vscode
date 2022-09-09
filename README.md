@@ -70,7 +70,7 @@ Initial release of **Ghost Theme Development Helper**
 ```
 
 
-## Deveopment
+## Development
 
 * Clone the repo
 * Install dependencies
@@ -80,6 +80,4 @@ yarn
 npm install
 ```
 * Start the debugger (`F5`)
-* See `development.md` for more information.
-
-
+* See [`development.md`](https://github.com/TryGhost/vscode-ghost-theme-development-helper/blob/ba52f9bd210b1b8033fbfc302ca61e3481b0df51/development.md) for more information.
