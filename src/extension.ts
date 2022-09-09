@@ -42,13 +42,11 @@ export function activate(context: vscode.ExtensionContext) {
       if (isPartial) {
         const partialDoc = definitions.find(doc => doc.name === "partials")!;
         const formattedPartialDoc = codeDetailFormatter(partialDoc);
-        console.log(partialDoc)
         return new vscode.Hover(formattedPartialDoc);
       }
 
       const range = document.getWordRangeAtPosition(position);
       const word = document.getText(range);
-
       const helper = definitions.find((val) => {
         const regEx = new RegExp("^#?@?" + val.name.replace(/\W/,"") + "$");
         return regEx.test(word);

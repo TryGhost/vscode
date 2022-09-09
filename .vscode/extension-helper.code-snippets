@@ -27,7 +27,9 @@
 				"\tdefinition: '$6',",
 				"\texample: `$7`,",
 				"\tlink: '$CLIPBOARD',",
-				"\tparents: ${8|null,''|}$9",
+				"\tparents: ${8|null,''|}$9,",
+				"\tattributes: ${10|null,''|}$11,",
+				"\tvariables: ${12|null,''|}$13",
 				"},",
 				"$0"
 			],

@@ -3,13 +3,15 @@ import { dataDefinitions } from "./dataHelpers";
 import { utilityDefinitions } from "./utilityHelpers";
 import { generateSpecialSnippets } from "./dynamicSnippets";
 import { helperVariables } from "./variables";
+import { attributes } from "./attributes";
 
 
 export const definitions = [
   ...functionalDefinitions,
   ...dataDefinitions,
   ...utilityDefinitions,
-  ...helperVariables
+  ...helperVariables,
+  ...attributes
 ];
 
 export const definitionsForQuickPick: {

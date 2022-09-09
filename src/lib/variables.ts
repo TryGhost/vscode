@@ -9,7 +9,9 @@ export const helperVariables: HelperSchema[] = [
     definition: "(number) the 0-based index of the current iteration",
     example: `{{#foreach posts}}\n\t<article class="@index">...</article>\n<{{/foreach}}`,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -20,7 +22,9 @@ export const helperVariables: HelperSchema[] = [
     definition: "(number) - the 1-based index of the current iteration",
     example: `{{#foreach posts}}\n\t<article class="@number">...</article>\n<{{/foreach}}`,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -32,7 +36,9 @@ export const helperVariables: HelperSchema[] = [
       "(string) - if iterating over an object, rather than an array, this contains the object key",
     example: `There’s no real use case for this in Ghost at present.`,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -47,7 +53,9 @@ export const helperVariables: HelperSchema[] = [
     {{/if}}
 {{/foreach}}`,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -63,7 +71,9 @@ export const helperVariables: HelperSchema[] = [
 {{/foreach}}
 `,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -79,7 +89,9 @@ export const helperVariables: HelperSchema[] = [
 {{/foreach}}
 `,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
@@ -95,37 +107,44 @@ export const helperVariables: HelperSchema[] = [
 {{/foreach}}
 `,
     link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
-    parents: "foreach",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
-    name: '@rowStart',
-    type: HelperTypes['variable'],
+    name: "@rowStart",
+    type: HelperTypes["variable"],
     snippet: null,
-    usage: '@rowStart',
-    definition: 'true if `columns` is passed and this iteration signals a row start',
+    usage: "@rowStart",
+    definition:
+      "true if `columns` is passed and this iteration signals a row start",
     example: `{{#foreach posts columns="3"}}
   {{#if @rowStart}}<div class="column">{{/if}}
       <a href="{{url}}">{{title}}</a>
   {{#if @rowEnd}}</div>{{/if}}
 {{/foreach}}`,
-    link: 'https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples',
-    parents: 'foreach'
+    link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
 
   {
-    name: '@rowEnd',
-    type: HelperTypes['variable'],
+    name: "@rowEnd",
+    type: HelperTypes["variable"],
     snippet: null,
-    usage: '@rowEnd',
-    definition: 'true if `columns` is passed and this iteration signals a row end',
+    usage: "@rowEnd",
+    definition:
+      "true if `columns` is passed and this iteration signals a row end",
     example: `{{#foreach posts columns="3"}}
   {{#if @rowStart}}<div class="column">{{/if}}
       <a href="{{url}}">{{title}}</a>
   {{#if @rowEnd}}</div>{{/if}}
 {{/foreach}}`,
-    link: 'https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples',
-    parents: 'foreach'
+    link: "https://ghost.org/docs/themes/helpers/foreach/#data-variable-examples",
+    parents: ["foreach"],
+    attributes: null,
+    variables: null,
   },
-  
 ];

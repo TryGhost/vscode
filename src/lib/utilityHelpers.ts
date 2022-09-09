@@ -21,7 +21,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: '{{{block "section"}}} and {{#contentFor "section"}}',
     definition:
-      '{{{block "block-name"}}} is a helper for creating a placeholder within a custom handlebars template.',
+      '`{{{block "block-name"}}}` is a helper for creating a placeholder within a custom handlebars template.',
     example: `<!-- default.hbs -->
 <body>
     {{{block "scripts"}}}
@@ -44,7 +44,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: '{{{block "section"}}} and {{#contentFor "section"}}',
     definition:
-      '{{#contentFor block name}} is a helper for adding to a block placeholder.',
+      '`{{#contentFor}}` is a helper for adding to a block placeholder.',
     example: `<!-- default.hbs -->
 <body>
     {{{block "scripts"}}}
@@ -67,7 +67,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{body_class}}",
     definition:
-      "{{body_class}} – outputs dynamic CSS classes intended for the <body> tag in your default.hbs or other layout file, and is useful for targeting specific pages (or contexts) with styles. Values include home-template, post-template, page-template, tag-template, author-template, and private-template",
+      "`{{body_class}}` outputs dynamic CSS classes intended for the `<body>` tag in your `default.hbs` or other layout file, and is useful for targeting specific pages (or contexts) with styles. Values include `home-template`, `post-template`, `page-template`, `tag-template`, `author-template`, and `private-template`",
     example: `<body class="{{body_class}}">`,
     link: "https://ghost.org/docs/themes/helpers/body_class/",
     parents: null,
@@ -81,7 +81,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: '{{concat "a" "b" "c"}}',
     definition:
-      "The {{concat}} helper is designed to concatenate and link multiple things together.",
+      "The `{{concat}}` helper is designed to concatenate and link multiple things together.",
     example: `{{concat "my-class" slug }}`,
     link: "https://ghost.org/docs/themes/helpers/concat/",
     parents: null,
@@ -95,7 +95,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{encode value}}",
     definition:
-      "{{encode}} is a simple output helper which will encode a given string so that it can be used in a URL.",
+      "`{{encode}}` is a simple output helper which will encode a given string so that it can be used in a URL.",
   example: `<a class="icon-twitter" href="https://twitter.com/share?text={{encode title}}&url={{url absolute='true'}}" onclick="window.open(this.href,    'twitter-share', 'width=550,height=235');return false;">
 <span class="hidden">Twitter</span>
 </a>`,
@@ -144,7 +144,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: '{{link_class for="/about/"}}',
     definition:
-      "The {{link_class}} helper adds dynamic classes depending on the currently viewed page.",
+      "The `{{link_class}}` helper adds dynamic classes depending on the currently viewed page.",
     example: `<li class="nav {{link_class for="/about/" activeClass="active"}}">About</li>`,
     link: "https://ghost.org/docs/themes/helpers/link_class/",
     parents: null,
@@ -158,7 +158,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{log value}}",
     definition:
-      "When running Ghost in development mode, use the {{log}} helper to output debug messages to the server console.",
+      "When running Ghost in development mode, use the `{{log}}` helper to output debug messages to the server console.",
     example: `{{log this}}`,
     link: "https://ghost.org/docs/themes/helpers/log/",
     parents: null,
@@ -172,7 +172,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: null,
     usage: "{{pagination}}",
     definition:
-      "{{pagination}} is a template driven helper which outputs HTML for ’newer posts’ and ‘older posts’ links if they are available and also says which page you are on.",
+      "`{{pagination}}` is a template driven helper which outputs HTML for ’newer posts’ and ‘older posts’ links if they are available and also says which page you are on.",
     example: `{{pagination}}
     <!-- outputs -->
     <nav class="pagination" role="navigation">
@@ -196,7 +196,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: `{{> "$1"}}\n$2`,
     usage: '{{> "partial-name"}}',
     definition:
-      '{{> "partials"}} is a helper for reusing chunks of template code in handlebars files.',
+      '`{{> "partials"}}` is a helper for reusing chunks of template code in handlebars files.',
     example: `{{#foreach posts}}
   {{> "post-card"}}
 {{/foreach}}`,
@@ -212,7 +212,7 @@ export const utilityDefinitions: HelperSchema[] = [
     snippet: `{{plural pagination.total empty='$1' singular='% $2' plural='% $3'}}$4`,
     usage: '{{plural value empty="" singular="" plural=""}}',
     definition:
-      "{{plural}} is a formatting helper for outputting strings which change depending on whether a number is singular or plural.",
+      "`{{plural}}` is a formatting helper for outputting strings which change depending on whether a number is singular or plural.",
     example: `{{plural pagination.total empty='No posts' singular='% post' plural='% posts'}}`,
     link: "https://ghost.org/docs/themes/helpers/plural/",
     parents: null,
