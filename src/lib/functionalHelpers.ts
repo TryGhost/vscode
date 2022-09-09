@@ -69,7 +69,7 @@ export const functionalDefinitions: HelperSchema[] = [
 
   {
     name: "if",
-    snippet: "{{#if $1}}\n\t$2\n{{/if}}",
+    snippet: "{{#if $1}}\n\t$0\n{{/if}}",
     type: HelperTypes["functional"],
     usage: "{{#if featured}}{{/if}}",
     definition: "Test very simple conditionals. Like all block helpers, `{{#if}}` supports adding an `{{else}}` block or using `^` instead of `#` for negation",

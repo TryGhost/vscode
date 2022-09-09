@@ -9,8 +9,23 @@ Hovering over any Ghost theme syntax will provide info about what the code and a
 ### Autocomplete
 Just start typing and Ghostwriter will do the rest by autocompleting your code.
 
-Currently, the following commands are supported:
--
+#### Snippets
+- `asset`
+- `custom`
+- `foreach`
+- `get`
+- `has`
+- `if`
+- `img:formats`
+- `img:responsive`
+- `img`
+- `is`
+- `partials`
+- `plural`
+- `post`
+- `price`
+- `site`
+- `unless`
 
 ### Dynamic autocomplete
 

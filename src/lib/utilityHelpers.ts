@@ -4,7 +4,7 @@ export const utilityDefinitions: HelperSchema[] = [
   {
     name: "asset",
     type: HelperTypes["utility"],
-    snippet: `{{asset '$1'}}$2`,
+    snippet: `{{asset '$1'}}`,
     usage: '{{asset "asset-path"}}',
     definition:
       "Outputs cacheable and cache-busting relative URLs to various asset",
@@ -193,7 +193,7 @@ export const utilityDefinitions: HelperSchema[] = [
   {
     name: "partials",
     type: HelperTypes["utility"],
-    snippet: `{{> "$1"}}\n$2`,
+    snippet: "{{> \"$1\"}}",
     usage: '{{> "partial-name"}}',
     definition:
       '`{{> "partials"}}` is a helper for reusing chunks of template code in handlebars files.',
@@ -209,7 +209,7 @@ export const utilityDefinitions: HelperSchema[] = [
   {
     name: "plural",
     type: HelperTypes["utility"],
-    snippet: `{{plural pagination.total empty='$1' singular='% $2' plural='% $3'}}$4`,
+    snippet: `{{plural pagination.total empty='$1' singular='% $2' plural='% $3'}}$0`,
     usage: '{{plural value empty="" singular="" plural=""}}',
     definition:
       "`{{plural}}` is a formatting helper for outputting strings which change depending on whether a number is singular or plural.",
