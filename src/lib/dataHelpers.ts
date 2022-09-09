@@ -205,7 +205,7 @@ export const dataDefinitions: HelperSchema[] = [
   {
     name: "img_url",
     snippet:
-      "{{img_url {1|feature_image,@site.cover_image,cover_image,profile_image|}}}",
+      "{{img_url ${1|feature_image,@site.cover_image,cover_image,profile_image|}}}",
     type: HelperTypes["data"],
     usage: "{{img_url value}}",
     definition:
@@ -287,7 +287,7 @@ export const dataDefinitions: HelperSchema[] = [
   {
     name: "price",
     snippet:
-      "{{price numberFormat='${1|short,long|}' currencyFormat='${2|symbol,code,name|}'}}$0",
+      "{{price $1 numberFormat='${2|short,long|}' currencyFormat='${3|symbol,code,name|}'}}$0",
     type: HelperTypes["data"],
     usage: "{{price plan}}",
     definition:

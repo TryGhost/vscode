@@ -104,7 +104,7 @@ export const functionalDefinitions: HelperSchema[] = [
   {
     name: "is",
     snippet:
-      "{{#is ${1|home,index,post,page,tag,author,paged,private}\n\t$2\n{{/is}}",
+      "{{#is ${1|home,index,post,page,tag,author,paged,private|}}}\n\t$2\n{{/is}}",
     type: HelperTypes["functional"],
     usage: '{{#is "contexts"}}',
     definition: "The `{{#is}}` helper allows you to check the context of the current route. For example, to check if this is the home page, a post, or a tag page. Use this to output different content based on the current context.",

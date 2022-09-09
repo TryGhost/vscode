@@ -6,7 +6,7 @@ export function codeDetailFormatter(helper: HelperSchema) {
 
   const markdown = new vscode.MarkdownString("", true);
   markdown.supportHtml = true;
-  markdown.appendMarkdown(`(${type} helper) **${name}**: \`${usage}\`\n\n`);
+  markdown.appendMarkdown(`(${type}) **${name}**: \`${usage}\`\n\n`);
   markdown.appendMarkdown('\n\n<hr>\n\n');
   markdown.appendMarkdown(`\n\n${definition}${parents ? ' Often used with ' + parents?.map(term => '`' + term + '`').join(", ") + "." : ''}\n\n`);
   markdown.appendMarkdown(`\n\n$(link-external) [${link}](${link})\n\n`);

@@ -18,7 +18,7 @@ Just start typing and Ghostwriter will do the rest by autocompleting your code.
 - `if`
 - `img:formats`
 - `img:responsive`
-- `img`
+- `img_url`
 - `is`
 - `partials`
 - `plural`
@@ -63,6 +63,11 @@ Initial release of **Ghost Theme Development Helper**
 ## Tips & Tricks
 - Matches for hover are simple, so the extension may generate some false positives.
 - For autocomplete, write Handlebar helpers without curly braces (`{{``}}`). For example, write `foreach` not `{{foreach}}`.
+- With autocomplete, use `tab` to advance your cursor
+- To use autocomplete options within other autocomplete syntax (like using `custom` with `match`), add the following in your VS Code `settings.json` file:
+```json
+  "editor.suggest.snippetsPreventQuickSuggestions": false
+```
 
 
 ## Deveopment

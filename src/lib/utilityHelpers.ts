@@ -209,7 +209,7 @@ export const utilityDefinitions: HelperSchema[] = [
   {
     name: "plural",
     type: HelperTypes["utility"],
-    snippet: `{{plural pagination.total empty='$1' singular='% $2' plural='% $3'}}$0`,
+    snippet: `{{plural \${1:pagination.total\$2} empty="$3" singular="% $4" plural="% $5"}}$0`,
     usage: '{{plural value empty="" singular="" plural=""}}',
     definition:
       "`{{plural}}` is a formatting helper for outputting strings which change depending on whether a number is singular or plural.",
