@@ -11,14 +11,16 @@ interface Custom {
   [name: string]: {};
 }
 
+const alt = `alt="\${5|{{title\}\},{{@site.title\}\},{{name\}\},{{#if feature_image_alt\}\}{{feature_image_alt\}\}{{else\}\}{{title\}\}{{/if\}\}|}"`
+
 const responsiveImageTemplate = (
   sizes: string,
   sizeNames: string
 ) => `<img class="$1"
     srcset="${sizes}"
     sizes="$3"
-    src="{{img_url \${2|@site.cover_image,feature_image|} size="\${4|${sizeNames}|}"}}"
-    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+    src="{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="\${4|${sizeNames}|}"}}"
+    ${alt}
 />`;
 
 const responsiveImageTemplateWithFormats = (
@@ -40,16 +42,19 @@ const responsiveImageTemplateWithFormats = (
   <img
     srcset="${sizes}"
     sizes="$3" 
-    src="{{img_url \${2|@site.cover_image,feature_image|} size="\${4|${sizeNames}|}"}}"
-    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+    src="{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="\${4|${sizeNames}|}"}}"
+    ${alt}
   >
 </picture>`;
 
-function createResponsiveImageHelper(image_sizes: Sizes, template: Function) {
-  const sizeNames = Object.keys(image_sizes).join();
-  console.log(sizeNames);
+function sizeMaker(keys: string[], image_sizes: Sizes, type: string | null = null) {
+  const format = !type
+    ? ""
+    : type === "avif"
+    ? ' format="avif"'
+    : ' format="webp"';
 
-  const sizes = Object.keys(image_sizes)
+  return keys
     .reduce((previous: any[], current: string) => {
       const size = { name: current, width: image_sizes[current].width };
 
@@ -70,10 +75,33 @@ function createResponsiveImageHelper(image_sizes: Sizes, template: Function) {
     })
     .map((size, idx, arr) =>
       arr.length === idx + 1
-        ? `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}"}} ${size.width}w`
-        : `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}"}} ${size.width}w,`
+        ? `\n\t{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="${size.name}"${format}}} ${size.width}w`
+        : `\n\t{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="${size.name}"${format}}} ${size.width}w,`
     )
     .join("");
+}
+
+function imageHelper(image_sizes: Sizes) {
+  const keys = Object.keys(image_sizes);
+
+  const sizeNames = keys.join();
+
+  const sizes = sizeMaker(keys, image_sizes);
+
+  const avif = sizeMaker(keys, image_sizes, "avif");
+
+  const webp = sizeMaker(keys, image_sizes, "webp");
+
+  return {
+    sizeNames,
+    sizes,
+    avif,
+    webp,
+  };
+}
+
+function createResponsiveImageHelper(image_sizes: Sizes, template: Function) {
+  const { sizes, sizeNames } = imageHelper(image_sizes);
 
   return {
     name: "img:responsive",
@@ -86,86 +114,7 @@ function createResponsiveImageHelperWithFormts(
   image_sizes: Sizes,
   template: Function
 ) {
-  const sizeNames = Object.keys(image_sizes).join();
-  console.log(sizeNames);
-
-  const sizes = Object.keys(image_sizes)
-    .reduce((previous: any[], current: string) => {
-      const size = { name: current, width: image_sizes[current].width };
-
-      previous.push(size);
-
-      return previous;
-    }, [])
-    .sort((a, b) => {
-      if (a.width > b.width) {
-        return 1;
-      }
-
-      if (a.width < b.width) {
-        return -1;
-      }
-
-      return 0;
-    })
-    .map((size, idx, arr) =>
-      arr.length === idx + 1
-        ? `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}"}} ${size.width}w`
-        : `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}"}} ${size.width}w,`
-    )
-    .join("");
-
-  const avif = Object.keys(image_sizes)
-    .reduce((previous: any[], current: string) => {
-      const size = { name: current, width: image_sizes[current].width };
-
-      previous.push(size);
-
-      return previous;
-    }, [])
-    .sort((a, b) => {
-      if (a.width > b.width) {
-        return 1;
-      }
-
-      if (a.width < b.width) {
-        return -1;
-      }
-
-      return 0;
-    })
-    .map((size, idx, arr) =>
-      arr.length === idx + 1
-        ? `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}" format="avif"}} ${size.width}w`
-        : `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}" format="avif"}} ${size.width}w,`
-    )
-    .join("");
-
-  const webp = Object.keys(image_sizes)
-    .reduce((previous: any[], current: string) => {
-      const size = { name: current, width: image_sizes[current].width };
-
-      previous.push(size);
-
-      return previous;
-    }, [])
-    .sort((a, b) => {
-      if (a.width > b.width) {
-        return 1;
-      }
-
-      if (a.width < b.width) {
-        return -1;
-      }
-
-      return 0;
-    })
-    .map((size, idx, arr) =>
-      arr.length === idx + 1
-        ? `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}" format="webp"}} ${size.width}w`
-        : `\n\t{{img_url \${2|@site.cover_image,feature_image|} size="${size.name}" format="webp"}} ${size.width}w,`
-    )
-    .join("");
+  const { sizes, sizeNames, avif, webp } = imageHelper(image_sizes);
 
   return {
     name: "img:formats",
@@ -198,7 +147,7 @@ export async function generateSpecialSnippets() {
     config: { image_sizes, custom },
   } = JSON.parse(Buffer.from(contents).toString("utf-8"));
   const customConfigSnippets = createCustomConfigHelper(custom);
-
+console.log(image_sizes);
   const responsiveImageSnippets = createResponsiveImageHelper(
     image_sizes,
     responsiveImageTemplate

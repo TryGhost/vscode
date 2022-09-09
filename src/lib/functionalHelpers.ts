@@ -85,6 +85,23 @@ export const functionalDefinitions: HelperSchema[] = [
   },
 
   {
+    name: "else",
+    snippet: null,
+    type: HelperTypes["functional"],
+    usage: "{{#if featured}}...{{else}}...{{/if}}",
+    definition: "Output content where the conditional is false. Use `{{else if ...}}`, `{{else match ...}}`, and so on to chain together multiple options like a switch statement.",
+    example: `{{#if feature_image}}
+    <img src="{{img_url feature_image}}" />
+ {{else}}
+    <img src="{{asset "img/default-img.jpg"}}" />
+ {{/if}}`,
+    link: "https://ghost.org/docs/themes/helpers/if/",
+    parents: ['if','has','match'],
+    attributes: null,
+    variables: null
+  },
+
+  {
     name: "is",
     snippet:
       "{{#is ${1|home,index,post,page,tag,author,paged,private}\n\t$2\n{{/is}}",
