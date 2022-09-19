@@ -43,6 +43,11 @@ Use the `Gscan` command to scan your Ghost theme for errors.
 
 If `Gscan` is not installed, you'll be prompted to install it before it runs.
 
+### GitHub Deploy Theme Action
+Use `Ghost Github Action` to add the GitHub Deploy Action to your theme.
+
+For it to work, you also need to set up a custom configuration on your Ghost site and add your secrets to GitHub. [Read the docs for more info](https://github.com/TryGhost/action-deploy-theme)
+
 <!-- \!\[feature X\]\(images/feature-x.png\) -->
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
@@ -71,13 +76,4 @@ Initial release of **Ghost Theme Development Helper**
 
 
 ## Development
-
-* Clone the repo
-* Install dependencies
-```bash
-yarn
-# or
-npm install
-```
-* Start the debugger (`F5`)
-* See [`development.md`](https://github.com/TryGhost/vscode-ghost-theme-development-helper/blob/ba52f9bd210b1b8033fbfc302ca61e3481b0df51/development.md) for more information.
+See [`CONTRIBUTING.md`](https://github.com/TryGhost/vscode-ghost-theme-development-helper/blob/ba52f9bd210b1b8033fbfc302ca61e3481b0df51/development.md) for more developing this extension.

@@ -32,6 +32,10 @@
 				"command": "ghost-theme-development-helper.gscan",
 				"title": "GScan your Ghost theme for errors",
 				"icon": "${bug}"
+			},
+			{
+				"command": "ghost-theme-development-helper.deploy",
+				"title": "Add Ghost GitHub Action for automatic theme deploys"
 			}
 		]
 	},
