@@ -1,4 +1,4 @@
-# Ghost
+# Ghost: Theme Tools
 
  The ultimate tool for developing themes for the open-source publishing platform [Ghost](https://ghost.org/). 
 
@@ -6,6 +6,9 @@
  * [Developer documentation](https://ghost.org/docs/)
  * [Tutorials](https://ghost.org/tutorials/)
  * [Source code for the official default Ghost theme, Casper](https://github.com/TryGhost/Casper)
+## Requirements
+
+Open your theme as the root folder in VS Code.
 
 ## Features
 
@@ -34,8 +37,6 @@ Just start typing and the extension will do the rest by autocompleting your Ghos
 - `price`
 - `site`
 - `unless`
-
-
 ### Dynamic autocomplete
 
 This extension also provides three dynamic autocomplete functions that reads data from your theme configuration (`package.json`).
@@ -65,9 +66,6 @@ Use `Ghost Github Action` to add the GitHub Deploy Action to your theme.
 
 
 > Tip: After adding the deploy script, set up your custom integration on your Ghost site and and add your secrets to GitHub. [Read the docs for more info](https://github.com/TryGhost/action-deploy-theme)
-## Requirements
-
-Open your theme as the root folder in VS Code.
 
 
 ## Release notes

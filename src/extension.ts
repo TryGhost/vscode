@@ -33,8 +33,6 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  
-
   let hoverProvider = vscode.languages.registerHoverProvider("handlebars", {
     provideHover(document, position, token) {
       const position2 = new vscode.Position(position.line, position.character);
