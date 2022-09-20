@@ -1,9 +1,12 @@
 # Change Log
 
-All notable changes to the "ghost-helper" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+All notable changes to the Ghost extension will be documented in this file.
 
 ## [Unreleased]
 
-- Initial release
+## [1.0.0] - 2022-09-20
+- Initial release 🎉
+
+## [1.1.0] - 2022-09-20
+### Added
+- Animations for extension features
