@@ -147,7 +147,6 @@ export async function generateSpecialSnippets() {
     config: { image_sizes, custom },
   } = JSON.parse(Buffer.from(contents).toString("utf-8"));
   const customConfigSnippets = createCustomConfigHelper(custom);
-console.log(image_sizes);
   const responsiveImageSnippets = createResponsiveImageHelper(
     image_sizes,
     responsiveImageTemplate

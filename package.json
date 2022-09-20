@@ -1,8 +1,8 @@
 {
-	"name": "ghost-theme-development-helper",
-	"displayName": "Ghost Theme Development Helper",
-	"description": "Helps you develop Ghost themes quickly",
-	"publisher": "Ghost",
+	"name": "ghost",
+	"displayName": "Ghost",
+	"description": "The ultimate Ghost theme development tool for the world's most popular open-source publishing platform",
+	"publisher": "TryGhost",
 	"icon": "images/ghost.png",
 	"galleryBanner": {
 		"color": "#15171A",
@@ -25,22 +25,22 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "ghost-theme-development-helper.search",
+				"command": "ghost.search",
 				"title": "Search Ghost's documentation"
 			},
 			{
-				"command": "ghost-theme-development-helper.gscan",
+				"command": "ghost.gscan",
 				"title": "GScan your Ghost theme for errors",
 				"icon": "${bug}"
 			},
 			{
-				"command": "ghost-theme-development-helper.deploy",
+				"command": "ghost.deploy",
 				"title": "Add Ghost GitHub Action for automatic theme deploys"
 			}
 		]
 	},
 	"repository": {
-		"url": "https://github.com/TryGhost/vscode-ghost-theme-development-helper"
+		"url": "https://github.com/TryGhost/vscode-ghost"
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

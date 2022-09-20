@@ -1,6 +1,5 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-
 import * as vscode from "vscode";
 
 import {
@@ -20,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
   let search = vscode.commands.registerCommand(
-    "ghost-theme-development-helper.search",
+    "ghost.search",
     async () => {
       const doc = await vscode.window.showQuickPick(definitionsForQuickPick, {
         matchOnDetail: true,
@@ -34,14 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  let gscan = vscode.commands.registerCommand(
-    "ghost-theme-development-helper.gscan",
-    () => {
-      const terminal = vscode.window.createTerminal("👻 Ghost GScan");
-      terminal.show();
-      terminal.sendText("npx gscan .");
-    }
-  );
+  
 
   let hoverProvider = vscode.languages.registerHoverProvider("handlebars", {
     provideHover(document, position, token) {
@@ -103,21 +95,24 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   let deployTheme = vscode.commands.registerCommand(
-    "ghost-theme-development-helper.deploy",
+    "ghost.deploy",
     async () => {
-      const alreadyExists = await vscode.workspace.findFiles(
-        "**/deploy-theme.yml"
-      );
-
-      if (alreadyExists.length) {
-        vscode.window.showWarningMessage(
-          "Action not run! A deploy-theme.yaml file already exists. To start fresh, delete file and run command again.",
-          { modal: true }
-        );
-        return;
-      }
-
+      
       try {
+
+        // Check if the file already exists. If it does, then we abort and give the user a message on how to start fresh
+        const alreadyExists = await vscode.workspace.findFiles(
+          "**/deploy-theme.yml"
+        );
+  
+        if (alreadyExists.length) {
+          vscode.window.showWarningMessage(
+            "Action not run! A deploy-theme.yaml file already exists. To start fresh, delete file and run command again.",
+            { modal: true }
+          );
+          return;
+        }
+
         // Get file path
         const extensionUri = context.asAbsolutePath(
           "files/deploy-theme.yml"
@@ -150,7 +145,6 @@ export function activate(context: vscode.ExtensionContext) {
         );
 
         if (selection) {
-          console.log(destination);
           switch (selection) {
             case "Learn more":
               vscode.env.openExternal(
@@ -169,6 +163,15 @@ export function activate(context: vscode.ExtensionContext) {
       } catch (e) {
         throw Error(JSON.stringify(e));
       }
+    }
+  );
+
+  let gscan = vscode.commands.registerCommand(
+    "ghost.gscan",
+    () => {
+      const terminal = vscode.window.createTerminal("👻 Ghost GScan");
+      terminal.show();
+      terminal.sendText("npx gscan .");
     }
   );
 
