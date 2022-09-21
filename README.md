@@ -1,11 +1,13 @@
-# Ghost: Theme Tools
+# Ghost
 
- The ultimate tool for developing themes for the open-source publishing platform [Ghost](https://ghost.org/). 
+ Official Ghost extension for theme development in Visual Studio Code. 
+ 
 
  New to Ghost theme development? Check out these resources:
  * [Developer documentation](https://ghost.org/docs/)
  * [Tutorials](https://ghost.org/tutorials/)
  * [Source code for the official default Ghost theme, Casper](https://github.com/TryGhost/Casper)
+ * [Learn more about the open-source publishing platform Ghost](https://ghost.org/)
 ## Requirements
 
 Open your theme as the root folder in VS Code.
@@ -13,7 +15,7 @@ Open your theme as the root folder in VS Code.
 ## Features
 
 ### Hover for info
-Hovering over Ghost theme syntax provides info about what the code does and a link to get more information.
+Hover over Ghost theme syntax to learn what the code does or click the link to open Ghost's official documentation.
 
 ![hover](images/hover.gif)
 ### Autocomplete
@@ -39,7 +41,7 @@ Just start typing and the extension will do the rest by autocompleting your Ghos
 - `unless`
 ### Dynamic autocomplete
 
-This extension also provides three dynamic autocomplete functions that reads data from your theme configuration (`package.json`).
+This extension also provides three dynamic autocomplete functions that read data from your theme's `package.json` file.
 
 ![dynamic snippets](images/dynamic.gif)
 
@@ -67,15 +69,6 @@ Use `Ghost Github Action` to add the GitHub Deploy Action to your theme.
 
 > Tip: After adding the deploy script, set up your custom integration on your Ghost site and and add your secrets to GitHub. [Read the docs for more info](https://github.com/TryGhost/action-deploy-theme)
 
-
-## Release notes
-
-- Initial release 🎉
-
-### 1.0.0
-
-Initial release of **Ghost Theme Development Helper**
-
 ## Tips & Tricks
 - For autocomplete, write Handlebar helpers without curly braces (`{{``}}`). For example, write `foreach` not `{{foreach}}`
 - With autocomplete, use `tab` to advance your cursor
@@ -83,6 +76,12 @@ Initial release of **Ghost Theme Development Helper**
 ```json
   "editor.suggest.snippetsPreventQuickSuggestions": false
 ```
+## Release notes
 
+- Initial release 🎉
+
+### 1.0.0
+
+Initial release
 ## Development
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for more developing this extension.
