@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let search = vscode.commands.registerCommand("ghost.search", async () => {
+  let search = vscode.commands.registerCommand("ghost.docs", async () => {
     const doc = await vscode.window.showQuickPick(definitionsForQuickPick, {
       matchOnDetail: true,
     });

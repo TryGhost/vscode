@@ -24,14 +24,15 @@
 	"activationEvents": [
 		"onCommand:ghost.docs",
 		"onLanguage:handlebars",
-		"onCommand:ghost.gscan"
+		"onCommand:ghost.gscan",
+		"onCommand:ghost.deploy"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "ghost.docs",
-				"title": "Search documentation",
+				"title": "Search docs",
 				"category": "Ghost"
 			},
 			{
