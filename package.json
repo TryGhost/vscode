@@ -1,7 +1,7 @@
 {
 	"name": "ghost",
-	"displayName": "Ghost: Theme Tools",
-	"description": "The ultimate Ghost theme development tool for the world's most popular open-source publishing platform",
+	"displayName": "Ghost",
+	"description": "Official Ghost extension for theme development in Visual Studio Code.",
 	"publisher": "TryGhost",
 	"icon": "images/ghost.png",
 	"galleryBanner": {
@@ -47,7 +47,7 @@
 		]
 	},
 	"repository": {
-		"url": "https://github.com/TryGhost/vscode-ghost-theme-development-helper"
+		"url": "https://github.com/TryGhost/vscode"
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
