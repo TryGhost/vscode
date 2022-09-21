@@ -50,19 +50,26 @@ This extension also provides three dynamic autocomplete functions that read data
 - `img:formats`: generates a responsive image srcset but also includes sytnax for converting image formats
 
 ### Help
-Use the `Ghost search` command to search theme documentation and open the official page in a browser.
+Use the `docs` command to search theme documentation and open the official page in a browser.
 
 ![search help docs](images/help.gif)
 
+By default, Ghost help docs will open in VS Code. Configure help docs to open in your system browser by updating your settings:
+
+```json
+"ghost.openDocsLocation": "browser"
+// Or
+"ghost.openDocsLocation": "vscode"
+```
 ### Gscan
-Use the `Gscan` command to scan your Ghost theme for errors. Errors and recommendations are output in a VS Code terminal window.
+Use the `gscan` command to scan your Ghost theme for errors. Errors and recommendations are output in a VS Code terminal window.
 
 ![gscan](images/gscan.gif)
 
 > If `Gscan` is not installed, you'll be prompted to install it before it runs.
 
 ### GitHub Deploy Theme Action
-Use `Ghost Github Action` to add the GitHub Deploy Action to your theme.
+Use the `deploy` command to add the GitHub Deploy Action to your theme.
 
 ![github](images/github.gif)
 
@@ -81,6 +88,9 @@ Use `Ghost Github Action` to add the GitHub Deploy Action to your theme.
 - Initial release 🎉
 
 ### 1.0.0
+
+### 1.2.0
+- Ghost help docs now open within VS Code
 
 Initial release
 ## Development

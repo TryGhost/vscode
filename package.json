@@ -22,7 +22,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:ghost.search",
+		"onCommand:ghost.docs",
 		"onLanguage:handlebars",
 		"onCommand:ghost.gscan"
 	],
@@ -30,7 +30,7 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "ghost.search",
+				"command": "ghost.docs",
 				"title": "Search documentation",
 				"category": "Ghost"
 			},
@@ -44,7 +44,19 @@
 				"title": "Add GitHub Actions code for automatic theme deploys",
 				"category": "Ghost"
 			}
-		]
+		],
+		"configuration": {
+			"title": "Ghost",
+			"properties": {
+				"ghost.openDocsLocation": {
+					"type": "string",
+					"enum": ["browser", "vscode"],
+					"enumDescriptions": ["Open Ghost docs in your browser", "Open Ghost docs in VS Code"],
+					"default": "vscode",
+					"description": "Configure whether you want Ghost to open docs in VS Code (default) or the browser"
+				}
+			}
+		}
 	},
 	"repository": {
 		"url": "https://github.com/TryGhost/vscode"
@@ -70,5 +82,8 @@
 		"mocha": "10.0.0",
 		"typescript": "4.8.3"
 	},
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^0.27.2"
+	}
 }

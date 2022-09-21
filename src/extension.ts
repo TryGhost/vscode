@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
+import axios from "axios";
 
 import {
   definitions,
@@ -18,20 +19,32 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let search = vscode.commands.registerCommand(
-    "ghost.search",
-    async () => {
-      const doc = await vscode.window.showQuickPick(definitionsForQuickPick, {
-        matchOnDetail: true,
-      });
+  let search = vscode.commands.registerCommand("ghost.search", async () => {
+    const doc = await vscode.window.showQuickPick(definitionsForQuickPick, {
+      matchOnDetail: true,
+    });
 
-      if (!doc) {
-        return;
-      }
-
-      vscode.env.openExternal(vscode.Uri.parse(doc.link));
+    if (!doc) {
+      return;
     }
-  );
+
+    const panel = vscode.window.createWebviewPanel(
+      "ghostHelpDoc",
+      `Ghost Doc: ${doc.label}`,
+      vscode.ViewColumn.One,
+      { enableScripts: true }
+    );
+
+    const pref = vscode.workspace.getConfiguration("ghost").get('openDocsLocation');
+
+    if (pref === 'vscode') {
+      const { data } = await axios.get(doc.link);
+      panel.webview.html = data;
+      return;
+    }
+
+    vscode.env.openExternal(vscode.Uri.parse(doc.link));
+  });
 
   let hoverProvider = vscode.languages.registerHoverProvider("handlebars", {
     provideHover(document, position, token) {
@@ -95,14 +108,12 @@ export function activate(context: vscode.ExtensionContext) {
   let deployTheme = vscode.commands.registerCommand(
     "ghost.deploy",
     async () => {
-      
       try {
-
         // Check if the file already exists. If it does, then we abort and give the user a message on how to start fresh
         const alreadyExists = await vscode.workspace.findFiles(
           "**/deploy-theme.yml"
         );
-  
+
         if (alreadyExists.length) {
           vscode.window.showWarningMessage(
             "Action not run! A deploy-theme.yaml file already exists. To start fresh, delete file and run command again.",
@@ -112,9 +123,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         // Get file path
-        const extensionUri = context.asAbsolutePath(
-          "files/deploy-theme.yml"
-        );
+        const extensionUri = context.asAbsolutePath("files/deploy-theme.yml");
         const file = vscode.Uri.file(extensionUri);
 
         // Create folder in theme
@@ -153,7 +162,7 @@ export function activate(context: vscode.ExtensionContext) {
               break;
 
             default:
-              vscode.commands.executeCommand('vscode.open',destination);
+              vscode.commands.executeCommand("vscode.open", destination);
 
               break;
           }
@@ -164,16 +173,19 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  let gscan = vscode.commands.registerCommand(
-    "ghost.gscan",
-    () => {
-      const terminal = vscode.window.createTerminal("👻 Ghost GScan");
-      terminal.show();
-      terminal.sendText("npx gscan .");
-    }
-  );
+  let gscan = vscode.commands.registerCommand("ghost.gscan", () => {
+    const terminal = vscode.window.createTerminal("👻 Ghost GScan");
+    terminal.show();
+    terminal.sendText("npx gscan .");
+  });
 
-  context.subscriptions.push(search, provider, hoverProvider, gscan, deployTheme);
+  context.subscriptions.push(
+    search,
+    provider,
+    hoverProvider,
+    gscan,
+    deployTheme
+  );
 }
 
 // this method is called when your extension is deactivated
