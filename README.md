@@ -83,15 +83,8 @@ Use the `deploy` command to add the GitHub Deploy Action to your theme.
 ```json
   "editor.suggest.snippetsPreventQuickSuggestions": false
 ```
-## Release notes
+## Release Notes
+See [`CHANGELOG.md](CHANGELOG.md) for details.
 
-- Initial release 🎉
-
-### 1.0.0
-
-### 1.2.0
-- Ghost help docs now open within VS Code
-
-Initial release
 ## Development
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for more developing this extension.
