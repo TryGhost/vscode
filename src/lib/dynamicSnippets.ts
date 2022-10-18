@@ -47,7 +47,7 @@ const responsiveImageTemplateWithFormats = (
   >
 </picture>`;
 
-function sizeMaker(keys: string[], image_sizes: Sizes, type: string | null = null) {
+export function sizeMaker(keys: string[], image_sizes: Sizes, type: string | null = null) {
   const format = !type
     ? ""
     : type === "avif"
@@ -81,7 +81,7 @@ function sizeMaker(keys: string[], image_sizes: Sizes, type: string | null = nul
     .join("");
 }
 
-function imageHelper(image_sizes: Sizes) {
+export function imageHelper(image_sizes: Sizes) {
   const keys = Object.keys(image_sizes);
 
   const sizeNames = keys.join();
