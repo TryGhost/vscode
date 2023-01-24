@@ -146,21 +146,24 @@ export async function generateSpecialSnippets() {
   const {
     config: { image_sizes, custom },
   } = JSON.parse(Buffer.from(contents).toString("utf-8"));
-  const customConfigSnippets = createCustomConfigHelper(custom);
-  const responsiveImageSnippets = createResponsiveImageHelper(
-    image_sizes,
-    responsiveImageTemplate
-  );
+  
+  const customSnippets = [];
+  
+  if (custom) {
+    customSnippets.push(createCustomConfigHelper(custom))
+  }
 
-  const responsiveImageTemplateWithFormatsSnippet =
-    createResponsiveImageHelperWithFormts(
+  if (image_sizes) {
+    customSnippets.push(createResponsiveImageHelper(
+      image_sizes,
+      responsiveImageTemplate
+    ));
+
+    customSnippets.push(createResponsiveImageHelperWithFormts(
       image_sizes,
       responsiveImageTemplateWithFormats
-    );
-
-  return [
-    responsiveImageSnippets,
-    customConfigSnippets,
-    responsiveImageTemplateWithFormatsSnippet,
-  ];
+    ));
+  }
+  
+  return customSnippets;
 }
