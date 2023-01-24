@@ -22,10 +22,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:ghost.docs",
-		"onLanguage:handlebars",
-		"onCommand:ghost.gscan",
-		"onCommand:ghost.deploy"
+		"onLanguage:handlebars"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

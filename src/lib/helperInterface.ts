@@ -3,7 +3,8 @@ export enum HelperTypes {
   data = "data",
   utility = "utility",
   attribute = "attribute",
-  variable = "variable"
+  variable = "variable",
+  context = "context",
 }
 
 export interface HelperSchema  {

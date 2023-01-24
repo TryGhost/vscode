@@ -4,6 +4,7 @@ import { utilityDefinitions } from "./utilityHelpers";
 import { generateSpecialSnippets } from "./dynamicSnippets";
 import { helperVariables } from "./variables";
 import { attributes } from "./attributes";
+import { contexts } from "./contexts";
 
 
 export const definitions = [
@@ -11,7 +12,8 @@ export const definitions = [
   ...dataDefinitions,
   ...utilityDefinitions,
   ...helperVariables,
-  ...attributes
+  ...attributes, 
+  ...contexts,
 ];
 
 export const definitionsForQuickPick: {
