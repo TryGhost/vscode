@@ -16,10 +16,11 @@ const alt = `alt="\${5|{{title\}\},{{@site.title\}\},{{name\}\},{{#if feature_im
 const responsiveImageTemplate = (
   sizes: string,
   sizeNames: string
-) => `<img class="$1"
+) => `<img
     srcset="${sizes}"
-    sizes="$3"
-    src="{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="\${4|${sizeNames}|}"}}"
+    sizes="$2"
+    src="{{img_url \${1|feature_image,@site.cover_image,cover_image,profile_image|} size="\${3|${sizeNames}|}"}}"
+    class="$4"
     ${alt}
 />`;
 
@@ -28,21 +29,22 @@ const responsiveImageTemplateWithFormats = (
   webp: string,
   sizes: string,
   sizeNames: string
-) => `<picture class="$1">
+) => `<picture>
   <source 
     srcset="${avif}"
-    sizes="$3" 
+    sizes="$2" 
     type="image/avif"
   >
   <source 
     srcset="${webp}"
-    sizes="$3" 
+    sizes="$2" 
     type="image/webp"
   >
   <img
+    class="$4"
     srcset="${sizes}"
-    sizes="$3" 
-    src="{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="\${4|${sizeNames}|}"}}"
+    sizes="$2" 
+    src="{{img_url \${1|feature_image,@site.cover_image,cover_image,profile_image|} size="\${3|${sizeNames}|}"}}"
     ${alt}
   >
 </picture>`;
@@ -75,8 +77,8 @@ export function sizeMaker(keys: string[], image_sizes: Sizes, type: string | nul
     })
     .map((size, idx, arr) =>
       arr.length === idx + 1
-        ? `\n\t{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="${size.name}"${format}}} ${size.width}w`
-        : `\n\t{{img_url \${2|feature_image,@site.cover_image,cover_image,profile_image|} size="${size.name}"${format}}} ${size.width}w,`
+        ? `\n\t{{img_url \${1|feature_image,@site.cover_image,cover_image,profile_image|} size="${size.name}"${format}}} ${size.width}w`
+        : `\n\t{{img_url \${1|feature_image,@site.cover_image,cover_image,profile_image|} size="${size.name}"${format}}} ${size.width}w,`
     )
     .join("");
 }
@@ -150,7 +152,7 @@ export async function generateSpecialSnippets() {
   const customSnippets = [];
   
   if (custom) {
-    customSnippets.push(createCustomConfigHelper(custom))
+    customSnippets.push(createCustomConfigHelper(custom));
   }
 
   if (image_sizes) {

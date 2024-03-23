@@ -416,9 +416,46 @@ export const dataDefinitions: HelperSchema[] = [
     definition:
       "`{{url}}` outputs the relative url for a post when inside the post scope.",
     example: `{{url absolute="true"}}`,
+
     link: "https://ghost.org/docs/themes/helpers/url/",
     parents: ["post"],
     attributes: ["absolute"],
     variables: null,
   },
+
+  {
+    name: 'page',
+    type: HelperTypes['data'],
+    snippet: "@page.show_title_and_feature_image",
+    usage: '@page',
+    definition: 'The `@page` object provides access to page properties, which are available anywhere in your theme.',
+    example: `{{#match @page.show_title_and_feature_image}}
+  ...content...
+{{/match}}`,
+    link: 'https://ghost.org/docs/themes/helpers/page/',
+    parents: null,
+    attributes: ["show_title_and_feature_image"],
+    variables: null
+  },
+
+  {
+    name: 'member',
+    type: HelperTypes['data'],
+    snippet: null,
+    usage: '@member',
+    definition: 'Use the `@member` object to determine which content within the theme is exposed depending on the access level of the member.',
+    example: `{{#if @member.paid}}
+  <p>Thanks for becoming a paying member 🎉</p>
+{{else if @member}}
+  <p>Thanks for being a member 🙌</p>
+{{else}}
+  <p>You should totally sign up... 🖋</p>
+{{/if}}`,
+    link: 'https://ghost.org/docs/themes/members/#the-member-object',
+    parents: null,
+    attributes: ['paid'],
+    variables: null
+  },
+  
+  
 ];

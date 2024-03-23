@@ -16,17 +16,13 @@ export function codeDetailFormatter(helper: HelperSchema) {
   markdown.appendMarkdown('\n\n<hr>\n\n');
 
   if (attributes) {
-    
-    
       markdown.appendMarkdown(`\n\nAttributes: ${attributes.map(term => '`' + term + '`').join(", ")}.\n\n`);
-    
   }
   
   markdown.appendMarkdown('\n\n<hr>\n\n');
 
   if (variables) {
     markdown.appendMarkdown(`\n\nVariables: ${variables.map(term => '`' + term + '`').join(", ")}.\n\n`);
-
   }
   return markdown;
 }

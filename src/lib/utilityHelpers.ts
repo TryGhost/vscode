@@ -62,6 +62,19 @@ export const utilityDefinitions: HelperSchema[] = [
   },
 
   {
+    name: "default",
+    type: HelperTypes["utility"],
+    snippet: "{{!< default}}",
+    usage: "{{!< default}}",
+    definition: "`{{!< default}}` tells Ghost to insert the template's contents into the `default.hbs` template.",
+    example: "{{!< default}}",
+    link: "https://ghost.org/tutorials/default/",
+    parents: null,
+    attributes: null,
+    variables: null
+  },
+
+  {
     name: "body_class",
     type: HelperTypes["utility"],
     snippet: null,

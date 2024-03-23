@@ -20,3 +20,8 @@ All notable changes to the Ghost extension will be documented in this file.
 - Updated dependencies
 - Fixed bug that crashed autocomplete when properties were missing in `package.json`
 - Added `contexts` to Ghost docs search
+
+## [1.5] - 2024-03-23
+- Improved autocompletion by checking for and removing redundant characters (`@`,`{{`,`}}`)
+- Updated commands to include `@page.show_title_and_feature_image`, `default`, and `member`
+- Added hotlinking for partials and assets (ctrl/cmd + click to open the file)

@@ -48,8 +48,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   let hoverProvider = vscode.languages.registerHoverProvider("handlebars", {
     provideHover(document, position, token) {
-      const position2 = new vscode.Position(position.line, position.character);
-      const line = document.lineAt(position2).text;
+      const line = document.lineAt(position).text;
+      const range = document.getWordRangeAtPosition(position);
+      const word = document.getText(range);
 
       const isPartial = /{{>/.test(line);
 
@@ -58,9 +59,6 @@ export function activate(context: vscode.ExtensionContext) {
         const formattedPartialDoc = codeDetailFormatter(partialDoc);
         return new vscode.Hover(formattedPartialDoc);
       }
-
-      const range = document.getWordRangeAtPosition(position);
-      const word = document.getText(range);
 
       const helper = definitions.find((val) => {
         const regEx = new RegExp("^#?@?" + val.name.replace(/\W/, "") + "$");
@@ -80,23 +78,37 @@ export function activate(context: vscode.ExtensionContext) {
   let provider = vscode.languages.registerCompletionItemProvider("handlebars", {
     async provideCompletionItems(
       document: vscode.TextDocument,
-      position: vscode.Position,
-      token: vscode.CancellationToken,
-      context: vscode.CompletionContext
+      position: vscode.Position
     ) {
       let commands: vscode.CompletionItem[] = [];
       const snippets = await definitionsWithSnippets();
-
       if (!snippets) {
         return;
       }
+      const line = document.lineAt(position).text;
+      const doesIncludeStartBracket = (/{{|@/).test(line);
+      const doesIncludeEndBracket = (/}}$/).test(line);
 
       snippets.forEach((item) => {
-        const commandCompletion = new vscode.CompletionItem(item.name);
-        commandCompletion.kind = vscode.CompletionItemKind.Snippet;
-        commandCompletion.detail = "Ghost template helper";
+        const commandCompletion = new vscode.CompletionItem(item.name, 13);
+        commandCompletion.detail = "Ghost";
         commandCompletion.documentation = item.definition;
-        commandCompletion.insertText = new vscode.SnippetString(item.snippet!);
+        
+        if (doesIncludeStartBracket && !doesIncludeEndBracket) {
+          commandCompletion.insertText = new vscode.SnippetString(
+            item.snippet!.replace(/{{|@/, "")
+          );
+        } else if (doesIncludeEndBracket && !doesIncludeStartBracket) {
+          commandCompletion.insertText = new vscode.SnippetString(
+            item.snippet!.replace(/}}$/, "")
+          );
+        } else if (doesIncludeStartBracket && doesIncludeEndBracket) {
+          commandCompletion.insertText = new vscode.SnippetString(
+            item.snippet!.replace(/{{|@/, "").replace(/}}$/, "")
+          );
+        } else {
+          commandCompletion.insertText = new vscode.SnippetString(item.snippet!);
+        }
 
         commands.push(commandCompletion);
       });
@@ -179,14 +191,72 @@ export function activate(context: vscode.ExtensionContext) {
     terminal.sendText("npx gscan .");
   });
 
+  // TS doesn't yet support the indices property on the RegExpMatchArray type
+  type RegExpMatchArrayWithIndices = RegExpMatchArray & { indices: Array<[number, number]> };
+
+  let generateLinksToPartials = vscode.languages.registerDocumentLinkProvider({scheme: 'file', language: 'handlebars'}, {
+    provideDocumentLinks(document, token) {
+      const text = document.getText();
+      const regex = new RegExp(/{{>\s*["|']([a-zA-Z0-9-_/]+)["|']\s*.*}}/dg);
+      const matches = text.matchAll(regex);
+      const links: vscode.DocumentLink[] = [];
+
+
+      if (matches) {
+        for (const match of matches) {
+          const [start, end] = (match as RegExpMatchArrayWithIndices).indices[1]; // Need to extend the type to reflect that indices is part of the return value
+          const startPos = document?.positionAt(start);
+          const endPos = document?.positionAt(end);
+          const range = new vscode.Range(startPos!, endPos!);
+          const word = document.getText(range);
+          const relativePath = `/partials/${word}.hbs`;
+          const fileUri = vscode.Uri.parse(`file://${vscode.workspace.workspaceFolders![0].uri.fsPath}${relativePath}`);
+          links.push(new vscode.DocumentLink(range, fileUri, ));
+        }
+      }
+
+      return links;
+    }
+  });
+
+  let generateLinksToAssets = vscode.languages.registerDocumentLinkProvider({scheme: 'file', language: '*'}, {
+    provideDocumentLinks(document, token) {
+      const text = document.getText();
+      const regex = new RegExp(/{{asset \s*["|']([a-zA-Z0-9-_/.]+)["|']\s*.*}}/dg);
+      const matches = text.matchAll(regex);
+      const links: vscode.DocumentLink[] = [];
+
+
+      if (matches) {
+        for (const match of matches) {
+         
+          const [start, end] = (match as RegExpMatchArrayWithIndices).indices[1]; // Need to extend the type to reflect that indices is part of the return value
+          const startPos = document?.positionAt(start);
+          const endPos = document?.positionAt(end);
+          const range = new vscode.Range(startPos!, endPos!);
+          const word = document.getText(range);
+          const relativePath = `/assets/${word}`;
+          const fileUri = vscode.Uri.parse(`file://${vscode.workspace.workspaceFolders![0].uri.fsPath}${relativePath}`);
+          links.push(new vscode.DocumentLink(range, fileUri, ));
+        }
+      }
+
+      return links;
+    }
+  });
+
+  
+
   context.subscriptions.push(
     search,
     provider,
     hoverProvider,
     gscan,
-    deployTheme
+    deployTheme,
+    generateLinksToPartials,
+    generateLinksToAssets
   );
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
