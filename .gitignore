@@ -3,4 +3,8 @@ dist
 node_modules
 .vscode-test/
 *.vsix
+
+/vscode.proposed.d.ts
+/vscode.d.ts
+
 .DS_Store
