@@ -1,7 +1,7 @@
 # Ghost
 
- Official Ghost extension for theme development in Visual Studio Code. 
- 
+ Official Ghost extension for theme development in Visual Studio Code.
+
 
  New to Ghost theme development? Check out these resources:
  * [Developer documentation](https://ghost.org/docs/)
@@ -88,3 +88,7 @@ See [`CHANGELOG.md](CHANGELOG.md) for details.
 
 ## Development
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for more developing this extension.
+
+## Copyright & License
+
+Copyright (c) 2013-2025 Ghost Foundation - Released under the [MIT license](LICENSE).
