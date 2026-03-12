@@ -174,24 +174,46 @@ export function activate(context: vscode.ExtensionContext) {
     terminal.sendText('npx gscan .');
   });
 
-  // TS doesn't yet support the indices property on the RegExpMatchArray type
-  type RegExpMatchArrayWithIndices = RegExpMatchArray & { indices: Array<[number, number]> };
+  function getCapturedRange(document: vscode.TextDocument, match: RegExpMatchArray) {
+    if (typeof match.index !== 'number') {
+      return;
+    }
+
+    const fullMatch = match[0];
+    const capturedText = match[1];
+
+    if (!capturedText) {
+      return;
+    }
+
+    const capturedOffset = fullMatch.indexOf(capturedText);
+
+    if (capturedOffset === -1) {
+      return;
+    }
+
+    const start = match.index + capturedOffset;
+    const end = start + capturedText.length;
+    return new vscode.Range(document.positionAt(start), document.positionAt(end));
+  }
 
   const generateLinksToPartials = vscode.languages.registerDocumentLinkProvider(
     { scheme: 'file', language: 'handlebars' },
     {
       provideDocumentLinks(document) {
         const text = document.getText();
-        const regex = new RegExp(/{{>\s*["|']([a-zA-Z0-9-_/]+)["|']\s*.*}}/dg);
+        const regex = /{{>\s*["|']([a-zA-Z0-9-_/]+)["|']\s*.*}}/g;
         const matches = text.matchAll(regex);
         const links: vscode.DocumentLink[] = [];
 
         if (matches) {
           for (const match of matches) {
-            const [start, end] = (match as RegExpMatchArrayWithIndices).indices[1]; // Need to extend the type to reflect that indices is part of the return value
-            const startPos = document?.positionAt(start);
-            const endPos = document?.positionAt(end);
-            const range = new vscode.Range(startPos!, endPos!);
+            const range = getCapturedRange(document, match);
+
+            if (!range) {
+              continue;
+            }
+
             const word = document.getText(range);
             const relativePath = `/partials/${word}.hbs`;
             const fileUri = vscode.Uri.parse(
@@ -211,16 +233,18 @@ export function activate(context: vscode.ExtensionContext) {
     {
       provideDocumentLinks(document) {
         const text = document.getText();
-        const regex = new RegExp(/{{asset \s*["|']([a-zA-Z0-9-_/.]+)["|']\s*.*}}/dg);
+        const regex = /{{asset \s*["|']([a-zA-Z0-9-_/.]+)["|']\s*.*}}/g;
         const matches = text.matchAll(regex);
         const links: vscode.DocumentLink[] = [];
 
         if (matches) {
           for (const match of matches) {
-            const [start, end] = (match as RegExpMatchArrayWithIndices).indices[1]; // Need to extend the type to reflect that indices is part of the return value
-            const startPos = document?.positionAt(start);
-            const endPos = document?.positionAt(end);
-            const range = new vscode.Range(startPos!, endPos!);
+            const range = getCapturedRange(document, match);
+
+            if (!range) {
+              continue;
+            }
+
             const word = document.getText(range);
             const relativePath = `/assets/${word}`;
             const fileUri = vscode.Uri.parse(
