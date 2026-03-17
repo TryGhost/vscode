@@ -41,3 +41,18 @@
  * Reduce the extension size and improve the startup time by [bundling your extension](https://code.visualstudio.com/api/working-with-extensions/bundling-extension).
  * [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) on the VSCode extension marketplace.
  * Automate builds by setting up [Continuous Integration](https://code.visualstudio.com/api/working-with-extensions/continuous-integration).
+
+## Publish to Open VSX
+
+Publishing to Open VSX makes the extension available in VSCodium, Cursor, and other editors that rely on the Open VSX registry.
+
+One-time maintainer setup:
+
+1. Create an Open VSX personal access token.
+2. Create or claim the `TryGhost` namespace on Open VSX so the published extension keeps the same `TryGhost.ghost` identifier.
+3. Add the token to this repository as a GitHub Actions secret named `OVSX_PAT`.
+
+Release flow:
+
+1. Push a version tag such as `v1.5.2`, or run the `Publish Open VSX` workflow manually.
+2. The workflow installs dependencies with Yarn, runs `yarn test`, verifies the token against the `TryGhost` namespace, and then publishes with `ovsx publish --yarn`.
