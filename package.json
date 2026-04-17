@@ -84,7 +84,7 @@
 		"eslint": "^8.57.0",
 		"prettier": "^3.2.5",
 		"rimraf": "^6.0.0",
-		"typescript": "^5.3.3"
+		"typescript": "^6.0.0"
 	},
 	"prettier": {
 		"printWidth": 100,
