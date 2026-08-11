@@ -4,6 +4,13 @@
   ],
   "packageRules": [
     {
+      "description": "Automerge GitHub Actions updates after release-age and CI checks",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "automerge": true
+    },
+    {
       "description": "Automerge safe dependency updates after CI passes",
       "matchUpdateTypes": [
         "digest",
