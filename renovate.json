@@ -1,5 +1,18 @@
 {
   "extends": [
     "@tryghost:quietJS"
+  ],
+  "packageRules": [
+    {
+      "description": "Automerge safe dependency updates after CI passes",
+      "matchUpdateTypes": [
+        "digest",
+        "lockFileMaintenance",
+        "minor",
+        "patch",
+        "pin"
+      ],
+      "automerge": true
+    }
   ]
 }
