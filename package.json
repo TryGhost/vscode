@@ -80,11 +80,12 @@
 		"@types/vscode": "^1.87.0",
 		"@typescript-eslint/eslint-plugin": "^8.0.0",
 		"@typescript-eslint/parser": "^8.0.0",
+		"@typescript/native": "npm:typescript@^7.0.0",
 		"esbuild": "^0.28.0",
 		"eslint": "^8.57.0",
 		"prettier": "^3.2.5",
 		"rimraf": "^6.0.0",
-		"typescript": "^7.0.0"
+		"typescript": "npm:@typescript/typescript6@^6.0.2"
 	},
 	"prettier": {
 		"printWidth": 100,
