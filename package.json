@@ -71,17 +71,15 @@
 		"build": "npm run -S esbuild-base -- --sourcemap",
 		"watch": "npm run -S esbuild-base -- --sourcemap --watch",
 		"fmt": "prettier --write \"src/**/*.ts\"",
-		"lint": "eslint src --ext ts --fix",
-		"test": "eslint src --ext ts && tsc --noEmit"
+		"lint": "oxlint --fix src",
+		"test": "oxlint src && tsc --noEmit"
 	},
 	"devDependencies": {
 		"@types/mocha": "^10.0.6",
 		"@types/node": "24.x",
 		"@types/vscode": "^1.87.0",
-		"@typescript-eslint/eslint-plugin": "^8.0.0",
-		"@typescript-eslint/parser": "^8.0.0",
 		"esbuild": "^0.28.0",
-		"eslint": "^8.57.0",
+		"oxlint": "^1.87.0",
 		"prettier": "^3.2.5",
 		"rimraf": "^6.0.0",
 		"typescript": "^7.0.0"
