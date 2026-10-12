@@ -70,7 +70,8 @@
 		"esbuild-base": "rimraf out && esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
 		"build": "npm run -S esbuild-base -- --sourcemap",
 		"watch": "npm run -S esbuild-base -- --sourcemap --watch",
-		"fmt": "prettier --write \"src/**/*.ts\"",
+		"fmt": "oxfmt --write \"src/**/*.ts\"",
+		"fmt:check": "oxfmt --check \"src/**/*.ts\"",
 		"lint": "oxlint --fix src",
 		"test": "oxlint src && tsc --noEmit"
 	},
@@ -80,15 +81,9 @@
 		"@types/vscode": "^1.87.0",
 		"esbuild": "^0.28.0",
 		"oxlint": "^1.87.0",
-		"prettier": "^3.2.5",
+		"oxfmt": "^0.72.0",
 		"rimraf": "^6.0.0",
 		"typescript": "^7.0.0"
-	},
-	"prettier": {
-		"printWidth": 100,
-		"singleQuote": true,
-		"tabWidth": 2,
-		"arrowParens": "avoid"
 	},
 	"license": "MIT",
 	"dependencies": {
