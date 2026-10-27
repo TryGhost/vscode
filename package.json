@@ -81,7 +81,7 @@
 		"@types/vscode": "^1.87.0",
 		"esbuild": "^0.28.0",
 		"oxlint": "^1.87.0",
-		"oxfmt": "^0.74.0",
+		"oxfmt": "^0.75.0",
 		"rimraf": "^6.0.0",
 		"typescript": "^7.0.0"
 	},
